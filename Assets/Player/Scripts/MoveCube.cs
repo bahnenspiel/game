@@ -9,16 +9,23 @@ public class MoveCube : MonoBehaviour {
 
 	private float speed;
 	private Rigidbody rb;
+	private GameState gameState;
 
 	private bool grounded = false;
 
 	// Use this for initialization
 	void Start () {
+		gameState = Camera.main.GetComponent<GameState>();
 		speed = 0;
 		rb = GetComponent<Rigidbody>();
 	}
 
+
 	void FixedUpdate () {
+		if(gameState.IsGameOver()) {
+			rb.velocity = new Vector3();
+			return;
+		}
 		if(Input.GetKeyDown(KeyCode.Space) && grounded) {
 			rb.AddForce(new Vector3(0,jumpSpeed,0));
 			var pos = transform.position;

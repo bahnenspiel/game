@@ -4,6 +4,6 @@ using System.Collections;
 public class CollisionGameOver : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider) {
-		Debug.Log ("Game Over");
+		Camera.main.GetComponent<GameState>().EndGame();
 	}
 }
