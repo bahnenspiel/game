@@ -20,7 +20,10 @@ public class MoveCube : MonoBehaviour {
 		speed = 0;
 		rb = GetComponent<Rigidbody>();
 	}
-	
+
+	void GameOver() {
+		GetComponent<MeshRenderer>().enabled = false;
+	}
 
 	void FixedUpdate () {
 		if(gameState.IsGameOver()) {

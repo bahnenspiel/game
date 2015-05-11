@@ -10,6 +10,7 @@ public class GameState : MonoBehaviour {
 	public void EndGame() {
 		gameOver = true;
 		explosion.Play();
+		GameObject.FindGameObjectWithTag("Player").BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
 		BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
 	}
 
