@@ -3,12 +3,14 @@ using System.Collections;
 
 public class MoveCube : MonoBehaviour {
 
-	public float steeringSpeed = 8f;
-	public float jumpSpeed = 1000f;
+	public float steeringSpeed = 10f;
+	public float jumpSpeed = 100f;
 	public float drivingSpeed = 10f;
 
 	private float speed;
 	private Rigidbody rb;
+
+	private bool grounded = false;
 
 	// Use this for initialization
 	void Start () {
@@ -17,22 +19,42 @@ public class MoveCube : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+		if(Input.GetKeyDown(KeyCode.Space) && grounded) {
+			rb.AddForce(new Vector3(0,jumpSpeed,0));
+			var pos = transform.position;
+			pos.y += 0.5f;
+			rb.MovePosition(pos);
+			grounded = false;
+		}
 		Vector3 vel = rb.velocity;
 		vel.z = speed;
 
 		if(Input.GetKey(KeyCode.LeftArrow)) {
 			vel.x = -steeringSpeed;
-		} else if(Input.GetKey(KeyCode.RightArrow)) {
+		}
+		if(Input.GetKey(KeyCode.RightArrow)) {
 			vel.x = steeringSpeed;
+		}
+		if(Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
+			vel.x = 0;
 		}
 
 		rb.velocity = vel;
 
-		if(Input.GetKeyDown(KeyCode.Space)) {
-			rb.AddForce(new Vector3(0,jumpSpeed,0));
-		}
 
 	}
+
+	void OnCollisionEnter(Collision collision) {
+		if(collision.collider.tag == "Ground") {
+			grounded = true;
+		}
+	}
+
+	/*void OnCollisionExit(Collision collision) {
+		if(collision.collider.tag == "Ground") {
+			grounded = false;
+		}
+	}*/
 	
 	// Update is called once per frame
 	void Update () {
