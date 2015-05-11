@@ -5,9 +5,12 @@ public class GameState : MonoBehaviour {
 
 	private bool gameOver = false;
 
+	public ParticleSystem explosion;
+
 	public void EndGame() {
 		gameOver = true;
-		SendMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
+		explosion.Play();
+		BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
 	}
 
 	public bool IsGameOver() {

@@ -11,6 +11,7 @@ public class MoveCube : MonoBehaviour {
 	private Rigidbody rb;
 	private GameState gameState;
 
+
 	private bool grounded = false;
 
 	// Use this for initialization
@@ -19,7 +20,7 @@ public class MoveCube : MonoBehaviour {
 		speed = 0;
 		rb = GetComponent<Rigidbody>();
 	}
-
+	
 
 	void FixedUpdate () {
 		if(gameState.IsGameOver()) {

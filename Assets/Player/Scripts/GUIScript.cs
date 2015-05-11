@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class GUI : MonoBehaviour
+public class GUIScript : MonoBehaviour
 {
 
 	void GameOver() {
-		Debug.Log ("Game Over");
+		Debug.Log ("Bla");
 	}
 
 }
