@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class MoveCube : MonoBehaviour {
+	
+	public float fuel = 100;
 
 	public float steeringSpeed = 10f;
 	public float jumpSpeed = 100f;
@@ -23,6 +25,7 @@ public class MoveCube : MonoBehaviour {
 
 	void GameOver() {
 		GetComponent<MeshRenderer>().enabled = false;
+
 	}
 
 	void FixedUpdate () {
@@ -75,5 +78,10 @@ public class MoveCube : MonoBehaviour {
 			speed -= drivingSpeed * Time.deltaTime;
 		}
 
+		fuel -= speed; 
+	}
+
+	public float getCurrentSpeed(){
+		return speed;
 	}
 }

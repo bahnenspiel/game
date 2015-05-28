@@ -6,11 +6,14 @@ public class GameState : MonoBehaviour {
 	private bool gameOver = false;
 
 	public ParticleSystem explosion;
+	public GameObject expl;
 
 	public void EndGame() {
 		gameOver = true;
-		explosion.Play();
-		GameObject.FindGameObjectWithTag("Player").BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+		GameObject.Instantiate(expl, player.transform.position, player.transform.rotation);
+		player.BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
 		BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
 	}
 
