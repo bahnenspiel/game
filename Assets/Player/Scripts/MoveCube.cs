@@ -9,9 +9,10 @@ public class MoveCube : MonoBehaviour {
 	public float jumpSpeed = 100f;
 	public float drivingSpeed = 10f;
 
-	private float speed;
+	//private float speed;
 	private Rigidbody rb;
 	private GameState gameState;
+	private SensorDataReceiver rcv;
 
 
 	private bool grounded = false;
@@ -19,8 +20,9 @@ public class MoveCube : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameState = Camera.main.GetComponent<GameState>();
-		speed = 0;
+		//speed = 0;
 		rb = GetComponent<Rigidbody>();
+		rcv = GetComponent<SensorDataReceiver>();
 	}
 
 	void GameOver() {
@@ -41,7 +43,7 @@ public class MoveCube : MonoBehaviour {
 			grounded = false;
 		}
 		Vector3 vel = rb.velocity;
-		vel.z = speed;
+		vel.z = rcv.speed;
 
 		if(Input.GetKey(KeyCode.LeftArrow)) {
 			vel.x = -steeringSpeed;
@@ -49,6 +51,9 @@ public class MoveCube : MonoBehaviour {
 		if(Input.GetKey(KeyCode.RightArrow)) {
 			vel.x = steeringSpeed;
 		}
+
+		vel.x = -1 * rcv.pitch;
+
 		if(Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
 			vel.x = 0;
 		}
@@ -72,16 +77,16 @@ public class MoveCube : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKey(KeyCode.UpArrow)) {
+		/*if(Input.GetKey(KeyCode.UpArrow)) {
 			speed += drivingSpeed * Time.deltaTime;
 		} else if(Input.GetKey(KeyCode.DownArrow)) {
 			speed -= drivingSpeed * Time.deltaTime;
-		}
+		}*/
 
-		fuel -= speed; 
+		fuel -= rcv.speed; 
 	}
 
 	public float getCurrentSpeed(){
-		return speed;
+		return rcv.speed;
 	}
 }
