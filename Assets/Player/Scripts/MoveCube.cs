@@ -52,7 +52,7 @@ public class MoveCube : MonoBehaviour {
 			vel.x = steeringSpeed;
 		}
 
-		vel.x = -1 * rcv.pitch;
+		vel.x = rcv.pitch;
 
 		if(Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
 			vel.x = 0;
@@ -91,7 +91,7 @@ public class MoveCube : MonoBehaviour {
 	}
 
 	public void stopPlayer(){
-		speed = 0;
+		//speed = 0;
 		steeringSpeed = 0;
 		jumpSpeed = 0;
 		drivingSpeed = 0;

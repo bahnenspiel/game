@@ -52,7 +52,7 @@ public class SensorDataReceiver : MonoBehaviour
 				if(messageText.StartsWith("p")){
 					messageText = messageText.Substring(1);
 				    //Debug.Log("pitch update: "+messageText);
-					pitch = float.Parse(messageText);
+					pitch = float.Parse(messageText) - 1.45f;
 				}
 				else if(messageText.StartsWith("rpm")){
 					messageText = messageText.Substring(3);
