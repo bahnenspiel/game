@@ -17,6 +17,11 @@ public class GameState : MonoBehaviour {
 		BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
 	}
 
+
+	public void LevelComplete() {
+		Debug.Log("Level Completed!");
+	}
+
 	public bool IsGameOver() {
 		return gameOver;
 	}

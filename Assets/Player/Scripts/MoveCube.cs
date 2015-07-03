@@ -89,4 +89,13 @@ public class MoveCube : MonoBehaviour {
 	public float getCurrentSpeed(){
 		return rcv.speed;
 	}
+
+	public void stopPlayer(){
+		speed = 0;
+		steeringSpeed = 0;
+		jumpSpeed = 0;
+		drivingSpeed = 0;
+
+		Camera.main.GetComponent<CameraScript>().moveCamera();
+	}
 }

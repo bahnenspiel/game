@@ -44,4 +44,12 @@ public class GameManagerScript : MonoBehaviour {
 		fuelText.text = "Treibstoff " + player.fuel;
 		levelText.text = "Level " + level;
 	}
+
+	public MoveCube getPlayer(){
+		return player;
+	}
+
+	public Text getfuelText(){
+		return fuelText;
+	}
 }
