@@ -43,7 +43,10 @@ public class MoveCube : MonoBehaviour {
 			grounded = false;
 		}
 		Vector3 vel = rb.velocity;
-		vel.z = rcv.speed;
+
+		//vel.z = rcv.speed;
+
+		vel.z = 20;
 
 		if(Input.GetKey(KeyCode.LeftArrow)) {
 			vel.x = -steeringSpeed;
@@ -52,7 +55,7 @@ public class MoveCube : MonoBehaviour {
 			vel.x = steeringSpeed;
 		}
 
-		vel.x = rcv.pitch;
+		//vel.x = rcv.pitch;
 
 		if(Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
 			vel.x = 0;
