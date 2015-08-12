@@ -4,6 +4,8 @@ using System.Collections;
 
 public class GameManagerScript : MonoBehaviour {
 
+	public GameObject levelObjects;
+
 	private GameManagerScript instance;
 	private MoveCube player;
 
@@ -36,6 +38,11 @@ public class GameManagerScript : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveCube>();
 		fuelText = GameObject.Find("FuelText").GetComponent<Text>();
 		levelText = GameObject.Find ("LevelText").GetComponent<Text>();
+	}
+	
+	public void LevelComplete() {
+		level++;
+		levelObjects.GetComponent<LevelGenerator>().JumpToLevel(level);
 	}
 
 

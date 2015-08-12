@@ -8,5 +8,8 @@ public class GoalScript : MonoBehaviour {
 
 		MoveCube player = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveCube>();
 		player.stopPlayer();
+		
+		GameManagerScript gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerScript>();
+		gm.LevelComplete();
 	}
 }

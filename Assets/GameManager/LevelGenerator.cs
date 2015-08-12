@@ -18,8 +18,13 @@ public class LevelGenerator : MonoBehaviour {
 		foreach (CharGameObjectMapping mapping in gameElements) {
 			prefabDict.Add(mapping.character, mapping.prefab);
 		}
+		GenerateLevel(1);
+	}
+	
+	void GenerateLevel(int id) {
+		
 
-		TextAsset tempAsset = (TextAsset) Resources.Load("Levels/1", typeof(TextAsset));
+		TextAsset tempAsset = (TextAsset) Resources.Load("Levels/" + id, typeof(TextAsset));
 
 		string levelText = tempAsset.text;
 
@@ -44,8 +49,12 @@ public class LevelGenerator : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public void JumpToLevel(int levelId) {
+		var children = new List<GameObject>();
+		foreach (Transform child in transform) children.Add(child.gameObject);
+		children.ForEach(child => Destroy(child));
+		
+		GenerateLevel(2);
 	}
+	
 }
