@@ -36,12 +36,23 @@ public class LevelGenerator : MonoBehaviour {
 		foreach (string line in lines) {
 			int x = 0;
 			foreach (char c in line) {
+<<<<<<< HEAD
 				if(prefabDict.ContainsKey(c)) {
 					GameObject prefab = prefabDict[c];
 				
 
 					GameObject newObject = (GameObject) GameObject.Instantiate(prefab, new Vector3(x, 0, y - 0.5f), new Quaternion());
 					newObject.transform.parent = transform;
+=======
+				if(prefabDict.ContainsKey(c) || prefabDict.ContainsKey(char.ToLower(c))) {
+					if (char.IsUpper(c)) {
+						GameObject prefab = prefabDict[char.ToLower(c)];
+						GameObject.Instantiate(prefab, new Vector3(x, 4, y ), new Quaternion());
+					} else {
+						GameObject prefab = prefabDict[c];
+						GameObject.Instantiate(prefab, new Vector3(x, 0, y ), new Quaternion());
+					}
+>>>>>>> Levelgenerator: Height
 				}
 				x += 5;
 			}
