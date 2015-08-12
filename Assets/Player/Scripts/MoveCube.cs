@@ -8,6 +8,8 @@ public class MoveCube : MonoBehaviour {
 	public float steeringSpeed = 10f;
 	public float jumpSpeed = 100f;
 	public float drivingSpeed = 10f;
+	
+	public bool bikeControls = false;
 
 	//private float speed;
 	private Rigidbody rb;
@@ -43,23 +45,26 @@ public class MoveCube : MonoBehaviour {
 			grounded = false;
 		}
 		Vector3 vel = rb.velocity;
-
-		//vel.z = rcv.speed;
-
-		vel.z = 20;
-
-		if(Input.GetKey(KeyCode.LeftArrow)) {
-			vel.x = -steeringSpeed;
+		
+		if (bikeControls) {
+			vel.z = rcv.speed;
+			vel.x = rcv.pitch;
 		}
-		if(Input.GetKey(KeyCode.RightArrow)) {
-			vel.x = steeringSpeed;
+		else {
+			vel.z = 20;
+			if(Input.GetKey(KeyCode.LeftArrow)) {
+				vel.x = -steeringSpeed;
+			}
+			if(Input.GetKey(KeyCode.RightArrow)) {
+				vel.x = steeringSpeed;
+			}
+			if(Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
+				vel.x = 0;
+			}
 		}
+		
 
-		//vel.x = rcv.pitch;
-
-		if(Input.GetKeyUp (KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
-			vel.x = 0;
-		}
+		
 
 		rb.velocity = vel;
 
