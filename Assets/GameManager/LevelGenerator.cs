@@ -27,14 +27,14 @@ public class LevelGenerator : MonoBehaviour {
 
 		System.Array.Reverse(lines);
 
-		int y = 0;
+		float y = 0;
 		foreach (string line in lines) {
 			int x = 0;
 			foreach (char c in line) {
 				if(prefabDict.ContainsKey(c)) {
 					GameObject prefab = prefabDict[c];
 				
-					GameObject.Instantiate(prefab, new Vector3(x, 0, y), new Quaternion());
+					GameObject.Instantiate(prefab, new Vector3(x, 0, y - 0.5f), new Quaternion());
 				}
 				x += 5;
 			}
