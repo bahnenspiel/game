@@ -24,20 +24,12 @@ public class GameManagerScript : MonoBehaviour {
 		}
 
 		DontDestroyOnLoad (gameObject);
-
-		InitGame();
 	}
 
 	void OnLevelWasLoaded(int index){
-		// level++;
-		InitGame ();
+		levelObjects = GameObject.FindGameObjectWithTag("LevelObjects");
 	}
 
-
-	void InitGame(){
-		
-	}
-	
 	public void LevelComplete() {
 		level++;
 		levelObjects.GetComponent<LevelGenerator>().JumpToLevel(level);
@@ -66,5 +58,14 @@ public class GameManagerScript : MonoBehaviour {
 
 	public Text getfuelText(){
 		return fuelText;
+	}
+
+	public void loadLevelSelectScene(){
+		Debug.Log("Button 1 Clicked");
+		Application.LoadLevel("LevelSelectScene");
+	}
+	
+	public void loadConfigScene(){
+		Application.LoadLevel("ConfigScene");
 	}
 }

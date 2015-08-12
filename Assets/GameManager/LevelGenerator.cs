@@ -11,10 +11,11 @@ public class LevelGenerator : MonoBehaviour {
 
 	public CharGameObjectMapping[] gameElements;
 
-	private Dictionary<char,GameObject> prefabDict = new Dictionary<char,GameObject>();
+	private Dictionary<char,GameObject> prefabDict = null;
 
 	// Use this for initialization
 	void Start () {
+		prefabDict = new Dictionary<char,GameObject>();
 		foreach (CharGameObjectMapping mapping in gameElements) {
 			prefabDict.Add(mapping.character, mapping.prefab);
 		}
