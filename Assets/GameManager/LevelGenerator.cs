@@ -54,7 +54,7 @@ public class LevelGenerator : MonoBehaviour {
 		foreach (Transform child in transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
 		
-		GenerateLevel(2);
+		GenerateLevel(levelId);
 	}
 	
 }

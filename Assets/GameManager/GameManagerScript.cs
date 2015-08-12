@@ -29,15 +29,13 @@ public class GameManagerScript : MonoBehaviour {
 	}
 
 	void OnLevelWasLoaded(int index){
-		level++;
+		// level++;
 		InitGame ();
 	}
 
 
 	void InitGame(){
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveCube>();
-		fuelText = GameObject.Find("FuelText").GetComponent<Text>();
-		levelText = GameObject.Find ("LevelText").GetComponent<Text>();
+		
 	}
 	
 	public void LevelComplete() {
@@ -48,8 +46,18 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		fuelText.text = "Treibstoff " + player.fuel;
-		levelText.text = "Level " + level;
+		if(GameObject.FindGameObjectWithTag("Player") != null) {
+			player = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveCube>();
+			fuelText = GameObject.Find("FuelText").GetComponent<Text>();
+			levelText = GameObject.Find ("LevelText").GetComponent<Text>();
+			
+			fuelText.text = "Treibstoff " + player.fuel;
+			levelText.text = "Level " + level;
+			
+		}
+		if(Input.GetKey(KeyCode.R)) {
+			levelObjects.GetComponent<LevelGenerator>().JumpToLevel(level);
+		}
 	}
 
 	public MoveCube getPlayer(){
