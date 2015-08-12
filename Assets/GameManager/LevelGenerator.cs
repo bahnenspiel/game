@@ -34,7 +34,9 @@ public class LevelGenerator : MonoBehaviour {
 				if(prefabDict.ContainsKey(c)) {
 					GameObject prefab = prefabDict[c];
 				
-					GameObject.Instantiate(prefab, new Vector3(x, 0, y - 0.5f), new Quaternion());
+
+					GameObject newObject = (GameObject) GameObject.Instantiate(prefab, new Vector3(x, 0, y - 0.5f), new Quaternion());
+					newObject.transform.parent = transform;
 				}
 				x += 5;
 			}
