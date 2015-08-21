@@ -56,12 +56,12 @@ public class LevelGenerator : MonoBehaviour {
 		}
 	}
 	
-	public void JumpToLevel(int levelId) {
-		var children = new List<GameObject>();
-		foreach (Transform child in transform) children.Add(child.gameObject);
-		children.ForEach(child => Destroy(child));
-		
-		GenerateLevel(levelId);
-	}
+//	public void JumpToLevel(int levelId) {
+//		var children = new List<GameObject>();
+//		foreach (Transform child in transform) children.Add(child.gameObject);
+//		children.ForEach(child => Destroy(child));
+//		
+//		GenerateLevel(levelId);
+//	}
 	
 }

@@ -10,6 +10,6 @@ public class GoalScript : MonoBehaviour {
 		player.stopPlayer();
 		
 		GameManagerScript gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerScript>();
-		gm.LevelComplete();
+//		gm.LevelComplete();
 	}
 }

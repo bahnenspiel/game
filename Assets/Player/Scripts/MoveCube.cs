@@ -7,7 +7,7 @@ public class MoveCube : MonoBehaviour {
 
 	public float steeringSpeed = 10f;
 	public float jumpSpeed = 100f;
-	public float drivingSpeed = 10f;
+	public float drivingSpeed = 0f;
 	
 	public bool bikeControls = false;
 
@@ -37,6 +37,12 @@ public class MoveCube : MonoBehaviour {
 			rb.velocity = new Vector3();
 			return;
 		}
+		if (Input.GetKey(KeyCode.UpArrow)){
+			drivingSpeed += 10 * Time.deltaTime;
+		} else if (Input.GetKey(KeyCode.DownArrow)){
+			drivingSpeed -= 10 * Time.deltaTime;
+		}
+
 		if(Input.GetKeyDown(KeyCode.Space) && grounded) {
 			rb.AddForce(new Vector3(0,jumpSpeed,0));
 			var pos = transform.position;
@@ -85,17 +91,19 @@ public class MoveCube : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*if(Input.GetKey(KeyCode.UpArrow)) {
+	/*	if(Input.GetKey(KeyCode.UpArrow)) {
 			speed += drivingSpeed * Time.deltaTime;
 		} else if(Input.GetKey(KeyCode.DownArrow)) {
 			speed -= drivingSpeed * Time.deltaTime;
-		}*/
+		
 
 		fuel -= rcv.speed; 
+
+	*/
 	}
 
 	public float getCurrentSpeed(){
-		return rcv.speed;
+		return drivingSpeed;
 	}
 
 	public void stopPlayer(){

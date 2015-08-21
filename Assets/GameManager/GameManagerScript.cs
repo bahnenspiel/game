@@ -4,7 +4,7 @@ using System.Collections;
 
 public class GameManagerScript : MonoBehaviour {
 
-	public GameObject levelObjects;
+	//public GameObject levelObjects;
 
 	private GameManagerScript instance;
 	private MoveCube player;
@@ -13,6 +13,10 @@ public class GameManagerScript : MonoBehaviour {
 
 	private Text fuelText;
 	private Text levelText;
+
+	// TODO: Länge des Levels anhand von LevelGenerator bestimmen
+	public int levelLength = 0;
+	private float playerSpeed = 0;
 
 	
 	void Awake()
@@ -23,37 +27,49 @@ public class GameManagerScript : MonoBehaviour {
 			Destroy (gameObject);    
 		}
 
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveCube>();
+
 		DontDestroyOnLoad (gameObject);
 	}
+	
 
-	void OnLevelWasLoaded(int index){
-		levelObjects = GameObject.FindGameObjectWithTag("LevelObjects");
-	}
+//	void OnLevelWasLoaded(int index){
+//		levelObjects = GameObject.FindGameObjectWithTag("LevelObjects");
+//	}
 
-	public void LevelComplete() {
-		level++;
-		levelObjects.GetComponent<LevelGenerator>().JumpToLevel(level);
-	}
+//	public void LevelComplete() {
+//		level++;
+//		levelObjects.GetComponent<LevelGenerator>().JumpToLevel(level);
+//	}
 
 
 	// Update is called once per frame
 	void Update () {
-		if(GameObject.FindGameObjectWithTag("Player") != null) {
+		if(GameObject.FindGameObjectWithTag("Player") == null) {
 			player = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveCube>();
-			fuelText = GameObject.Find("FuelText").GetComponent<Text>();
-			levelText = GameObject.Find ("LevelText").GetComponent<Text>();
-			
-			fuelText.text = "Treibstoff " + player.fuel;
-			levelText.text = "Level " + level;
-			
 		}
-		if(Input.GetKey(KeyCode.R)) {
-			levelObjects.GetComponent<LevelGenerator>().JumpToLevel(level);
-		}
+
+		playerSpeed = player.getCurrentSpeed();
+
+//		if(Input.GetKey(KeyCode.R)) {
+//			levelObjects.GetComponent<LevelGenerator>().JumpToLevel(level);
+//		}
+	}
+
+	public float getPlayerPosition(){
+		return player.transform.position.z;
 	}
 
 	public MoveCube getPlayer(){
 		return player;
+	}
+
+	public int getLevelLength(){
+		return levelLength;
+	}
+
+	public float getPlayerSpeed(){
+		return playerSpeed;
 	}
 
 	public Text getfuelText(){
