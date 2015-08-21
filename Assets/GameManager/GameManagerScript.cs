@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour {
+
+	public GameObject explosion;
 
 	private GameManagerScript instance;
 	private MoveCube player = null;
 
 	private int level = 1;
-
-	// TODO: Länge des Levels anhand von LevelGenerator bestimmen
 	public int levelLength = 0;
+	public int levelTime = 0;
 	private float playerSpeed = 0;
+
+	private float currentTime = 0;
+
+	private bool gameOver = false;
 
 	
 	void Start()
@@ -30,6 +36,8 @@ public class GameManagerScript : MonoBehaviour {
 	void Update () {
 		if(player != null) {
 			playerSpeed = player.getCurrentSpeed();
+
+			currentTime += Time.deltaTime;
 		}
 	}
 
@@ -50,6 +58,19 @@ public class GameManagerScript : MonoBehaviour {
 			return 0;
 	}
 
+	public void destroyPlayer(){
+		if (gameOver){
+			return;
+		} else {
+			gameOver = true;
+			Vector3 pos = player.transform.position;
+			Camera.main.transform.parent = null;
+			player.gameObject.SetActive(false);
+			GameObject.Instantiate(explosion, pos, new Quaternion());
+		}
+
+	}
+
 	public MoveCube getPlayer(){
 		return player;
 	}
@@ -66,12 +87,22 @@ public class GameManagerScript : MonoBehaviour {
 		return playerSpeed;
 	}
 
+	public float getCurrentTime(){
+		return currentTime;
+	}
+
+	public float getLevelTime(){
+		return levelTime;
+	}
+
 	public void loadLevel(){
 		player = null;
 		Application.LoadLevel("TrackLoaderScene");
 	}
 
 	public void levelLoaded(){
+		gameOver = false;
+		currentTime = 0;
 		findPlayer();
 	}
 

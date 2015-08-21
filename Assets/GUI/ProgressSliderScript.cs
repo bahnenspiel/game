@@ -17,14 +17,12 @@ public class ProgressSliderScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		playerPosition = gm.getPlayerPosition();
-		//Debug.Log (">> ProgressSliderScript: Player Position: " + playerPosition);
 		updateSlider(playerPosition);
 	}
 
 
 	private void updateSlider(float playerPosition){
 		float sliderValue = playerPosition / (gm.getLevelLength() * 20);
-		Debug.Log (">> ProgressSliderScript: Slider Value: " + sliderValue);
 		slider.value = sliderValue;
 	}
 }

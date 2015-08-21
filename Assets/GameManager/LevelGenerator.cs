@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class LevelGenerator : MonoBehaviour {
 
 	private GameManagerScript gm;
-	private int maxLevel;
+	private int time;
 
 	[System.Serializable]
 	public struct CharGameObjectMapping {
@@ -23,9 +23,6 @@ public class LevelGenerator : MonoBehaviour {
 		prefabDict.Add(mapping.character, mapping.prefab);
 		}
 
-		maxLevel = Resources.LoadAll("Levels/", typeof(TextAsset)).Length;
-		Debug.Log("Max Level: " + maxLevel);
-
 		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
 		GenerateLevel(gm.getLevelNumber());
 	}
@@ -40,10 +37,12 @@ public class LevelGenerator : MonoBehaviour {
 
 		System.Array.Reverse(lines);
 
+		time = int.Parse(lines[lines.Length - 1 ]);
+
 		float y = 0;
-		foreach (string line in lines) {
+		for (int i = 0; i < lines.Length - 1; i++ ) {
 			int x = 0;
-			foreach (char c in line) {
+			foreach (char c in lines[i]) {
 		
 				if(prefabDict.ContainsKey(c) || prefabDict.ContainsKey(char.ToLower(c))) {
 						GameObject newObject = null;
@@ -65,16 +64,8 @@ public class LevelGenerator : MonoBehaviour {
 		}
 
 		gm.levelLoaded();
-		gm.levelLength = lines.Length - 1;
+		gm.levelLength = lines.Length - 2;
+		gm.levelTime = time;
 
 	}
-	
-//	public void JumpToLevel(int levelId) {
-//		var children = new List<GameObject>();
-//		foreach (Transform child in transform) children.Add(child.gameObject);
-//		children.ForEach(child => Destroy(child));
-//		
-//		GenerateLevel(levelId);
-//	}
-	
 }
