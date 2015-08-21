@@ -21,6 +21,7 @@ public class ProgressSliderScript : MonoBehaviour {
 		updateSlider(playerPosition);
 	}
 
+
 	private void updateSlider(float playerPosition){
 		float sliderValue = playerPosition / (gm.getLevelLength() * 20);
 		//Debug.Log (">> ProgressSliderScript: Slider Value: " + sliderValue);

@@ -2,14 +2,19 @@
 using System.Collections;
 
 public class GoalScript : MonoBehaviour {
+	private bool triggered = false;
 
 	void OnTriggerEnter(Collider collider) {
-		Camera.main.GetComponent<GameState>().LevelComplete();
+		if (triggered)
+			return;
+		else
+			triggered = true;
 
-		MoveCube player = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveCube>();
+	/*	MoveCube player = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveCube>();
 		player.stopPlayer();
+	*/
 		
-		GameManagerScript gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerScript>();
-//		gm.LevelComplete();
+		GameManagerScript gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
+		gm.LevelCompleted();
 	}
 }

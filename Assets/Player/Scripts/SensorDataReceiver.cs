@@ -37,6 +37,7 @@ public class SensorDataReceiver : MonoBehaviour
 	}
 
 	void OnDisable() {
+		CleanupConnection();
 		Debug.Log ("disabled");
 	}
 
@@ -77,6 +78,7 @@ public class SensorDataReceiver : MonoBehaviour
 	}
 
 	void OnDestroy(){
+		CleanupConnection();
 		Debug.Log ("destroy");
 	}
 

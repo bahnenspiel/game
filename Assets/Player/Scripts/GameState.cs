@@ -12,17 +12,6 @@ public class GameState : MonoBehaviour {
 		gameOver = true;
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-		GameObject.Instantiate(expl, player.transform.position, player.transform.rotation);
-		player.BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
-		BroadcastMessage("GameOver", null, SendMessageOptions.DontRequireReceiver);
-	}
-
-
-	public void LevelComplete() {
-		Debug.Log("Level Completed!");
-	}
-
-	public bool IsGameOver() {
-		return gameOver;
+		//GameObject.Instantiate(expl, player.transform.position, player.transform.rotation);
 	}
 }

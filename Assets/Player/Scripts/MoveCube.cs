@@ -33,10 +33,10 @@ public class MoveCube : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if(gameState.IsGameOver()) {
+		/*if(gameState.IsGameOver()) {
 			rb.velocity = new Vector3();
 			return;
-		}
+		}*/
 		if (Input.GetKey(KeyCode.UpArrow)){
 			drivingSpeed += 10 * Time.deltaTime;
 		} else if (Input.GetKey(KeyCode.DownArrow)){

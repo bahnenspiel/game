@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class LevelGenerator : MonoBehaviour {
 
+	private GameManagerScript gm;
+
 	[System.Serializable]
 	public struct CharGameObjectMapping {
 		public char character;
@@ -17,9 +19,11 @@ public class LevelGenerator : MonoBehaviour {
 	void Start () {
 		prefabDict = new Dictionary<char,GameObject>();
 		foreach (CharGameObjectMapping mapping in gameElements) {
-			prefabDict.Add(mapping.character, mapping.prefab);
+		prefabDict.Add(mapping.character, mapping.prefab);
 		}
-		GenerateLevel(1);
+
+		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
+		GenerateLevel(gm.getLevelNumber());
 	}
 	
 	void GenerateLevel(int id) {
@@ -37,23 +41,29 @@ public class LevelGenerator : MonoBehaviour {
 		foreach (string line in lines) {
 			int x = 0;
 			foreach (char c in line) {
+		
 				if(prefabDict.ContainsKey(c) || prefabDict.ContainsKey(char.ToLower(c))) {
-					GameObject newObject = null;
+						GameObject newObject = null;
 
-					if (char.IsUpper(c)) {
-						GameObject prefab = prefabDict[char.ToLower(c)];
-						newObject = (GameObject) GameObject.Instantiate(prefab, new Vector3(x, 4, y ), new Quaternion());
-					} else {
-						GameObject prefab = prefabDict[c];
-						newObject = (GameObject) GameObject.Instantiate(prefab, new Vector3(x, 0, y ), new Quaternion());
+						if (char.IsUpper(c)) {
+							GameObject prefab = prefabDict[char.ToLower(c)];
+							newObject = (GameObject) GameObject.Instantiate(prefab, new Vector3(x, 4, y ), new Quaternion());
+						} else {
+							GameObject prefab = prefabDict[c];
+							newObject = (GameObject) GameObject.Instantiate(prefab, new Vector3(x, 0, y ), new Quaternion());
+						}
+
+						newObject.transform.parent = transform;
 					}
 
-					newObject.transform.parent = transform;
-				}
 				x += 5;
 			}
 			y += 20;
 		}
+
+		gm.levelLoaded();
+		gm.levelLength = lines.Length - 1;
+
 	}
 	
 //	public void JumpToLevel(int levelId) {
