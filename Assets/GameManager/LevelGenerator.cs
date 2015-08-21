@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class LevelGenerator : MonoBehaviour {
 
 	private GameManagerScript gm;
+	private int maxLevel;
 
 	[System.Serializable]
 	public struct CharGameObjectMapping {
@@ -22,12 +23,14 @@ public class LevelGenerator : MonoBehaviour {
 		prefabDict.Add(mapping.character, mapping.prefab);
 		}
 
+		maxLevel = Resources.LoadAll("Levels/", typeof(TextAsset)).Length;
+		Debug.Log("Max Level: " + maxLevel);
+
 		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
 		GenerateLevel(gm.getLevelNumber());
 	}
 	
 	void GenerateLevel(int id) {
-		
 
 		TextAsset tempAsset = (TextAsset) Resources.Load("Levels/" + id, typeof(TextAsset));
 

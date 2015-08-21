@@ -77,6 +77,13 @@ public class GameManagerScript : MonoBehaviour {
 
 	public void LevelCompleted(){
 		level++;
-		loadLevel();
+
+		if (level > Resources.LoadAll("Levels/", typeof(TextAsset)).Length){
+			level = 1;
+			Application.LoadLevel("WinScene");
+		} else {
+			loadLevel();
+		}
 	}
+
 }
