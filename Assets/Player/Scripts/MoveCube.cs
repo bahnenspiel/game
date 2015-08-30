@@ -7,7 +7,11 @@ public class MoveCube : MonoBehaviour {
 
 	public float steeringSpeed = 10f;
 	public float jumpSpeed = 100f;
-	public float drivingSpeed = 0f;
+	
+	
+	public float minSpeed = 10, maxSpeed = 80;
+	
+	public float drivingSpeed;
 	
 	public bool bikeControls = false;
 
@@ -42,8 +46,10 @@ public class MoveCube : MonoBehaviour {
 		} else if (Input.GetKey(KeyCode.DownArrow)){
 			drivingSpeed -= 10 * Time.deltaTime;
 		}
+		
+		bool jump = Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0);
 
-		if(Input.GetKeyDown(KeyCode.Space) && grounded) {
+		if(jump && grounded) {
 			rb.AddForce(new Vector3(0,jumpSpeed,0));
 			var pos = transform.position;
 			pos.y += 0.5f;
@@ -53,11 +59,11 @@ public class MoveCube : MonoBehaviour {
 		Vector3 vel = rb.velocity;
 		
 		if (bikeControls) {
-			vel.z = rcv.speed;
+			drivingSpeed = rcv.speed;
 			vel.x = rcv.pitch;
 		}
 		else {
-			vel.z = 20;
+			
 			if(Input.GetKey(KeyCode.LeftArrow)) {
 				vel.x = -steeringSpeed;
 			}
@@ -69,8 +75,10 @@ public class MoveCube : MonoBehaviour {
 			}
 		}
 		
-
+		drivingSpeed = Mathf.Min(drivingSpeed, maxSpeed);
+		drivingSpeed = Mathf.Max(drivingSpeed, minSpeed);
 		
+		vel.z = drivingSpeed;
 
 		rb.velocity = vel;
 

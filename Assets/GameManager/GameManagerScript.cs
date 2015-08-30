@@ -38,6 +38,10 @@ public class GameManagerScript : MonoBehaviour {
 			playerSpeed = player.getCurrentSpeed();
 
 			currentTime += Time.deltaTime;
+			
+			if (Input.GetMouseButtonDown(1)) {
+				loadLevel();
+			}
 		}
 	}
 

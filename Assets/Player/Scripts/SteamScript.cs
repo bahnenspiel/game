@@ -22,8 +22,12 @@ public class SteamScript : MonoBehaviour {
 	}
 
 	void activateSteam(bool val){
-		steam[0].SetActive(val);
-		steam[1].SetActive(val);
+		for(int i = 0; i < 2; i++) {
+			steam[i].SetActive(val);
+			ParticleSystem ps = steam[i].GetComponent<ParticleSystem>();
+			ps.emissionRate = player.getCurrentSpeed() * 10;
+		}
+		
 	}
 
 
