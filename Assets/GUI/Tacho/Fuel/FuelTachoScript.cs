@@ -28,7 +28,6 @@ public class FuelTachoScript : MonoBehaviour {
 		currentTime = gm.getCurrentTime();
 		maxTime = gm.getLevelTime();
 
-		Debug.Log(currentTime);
 
 		float temp = (maxTime - currentTime) / maxTime;
 		int tileNumber = (int)(temp * tiles.Length);
