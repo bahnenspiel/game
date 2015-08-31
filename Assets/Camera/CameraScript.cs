@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraScript : MonoBehaviour {
 
 	private GameManagerScript gm;
-	bool moveCameraBool = false;
+	public bool moveCameraBool = false;
 
 	// Use this for initialization
 	void Start () {

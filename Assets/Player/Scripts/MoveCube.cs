@@ -14,10 +14,9 @@ public class MoveCube : MonoBehaviour {
 	public float drivingSpeed;
 	
 	public bool bikeControls = false;
+	public AudioClip jumpSound;
 
-	//private float speed;
 	private Rigidbody rb;
-	private GameState gameState;
 	private SensorDataReceiver rcv;
 
 
@@ -25,8 +24,6 @@ public class MoveCube : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameState = Camera.main.GetComponent<GameState>();
-		//speed = 0;
 		rb = GetComponent<Rigidbody>();
 		rcv = GetComponent<SensorDataReceiver>();
 	}
@@ -55,6 +52,7 @@ public class MoveCube : MonoBehaviour {
 			pos.y += 0.5f;
 			rb.MovePosition(pos);
 			grounded = false;
+			AudioSource.PlayClipAtPoint(jumpSound, transform.position);
 		}
 		Vector3 vel = rb.velocity;
 		

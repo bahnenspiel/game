@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManagerScript : MonoBehaviour {
 
 	public GameObject explosion;
+	public AudioClip explosionSound;
 
 	private GameManagerScript instance;
 	private MoveCube player = null;
@@ -58,9 +59,6 @@ public class GameManagerScript : MonoBehaviour {
 			destroyPlayer();
 			restartTime -= Time.deltaTime;
 			Text restartLabel = GameObject.FindGameObjectWithTag("RestartLabel").GetComponent<Text>();
-
-
-			//gameOverLabel.text = "Out of Energy!";
 			restartLabel.text = "Restart in " + (int)restartTime;
 			
 			if (restartTime <= 0){
@@ -100,6 +98,7 @@ public class GameManagerScript : MonoBehaviour {
 			Camera.main.transform.parent = null;
 			player.gameObject.SetActive(false);
 			GameObject.Instantiate(explosion, pos, new Quaternion());
+			AudioSource.PlayClipAtPoint(explosionSound, player.transform.position);
 		}
 
 	}
