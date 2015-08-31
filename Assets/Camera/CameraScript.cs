@@ -3,11 +3,14 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
 
+	private GameManagerScript gm;
 	bool moveCameraBool = false;
 
 	// Use this for initialization
 	void Start () {
-	
+		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
+		gameObject.GetComponent<Skybox>().material = gm.getSkybox();
+
 	}
 	
 	// Update is called once per frame
@@ -24,4 +27,6 @@ public class CameraScript : MonoBehaviour {
 	public void moveCamera(){
 		moveCameraBool = true;
 	}
+
+
 }

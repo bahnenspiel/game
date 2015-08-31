@@ -9,7 +9,7 @@ public class MoveCube : MonoBehaviour {
 	public float jumpSpeed = 100f;
 	
 	
-	public float minSpeed = 10, maxSpeed = 80;
+	public float minSpeed = 0, maxSpeed = 80;
 	
 	public float drivingSpeed;
 	

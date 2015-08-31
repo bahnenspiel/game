@@ -10,7 +10,6 @@ public class FuelTachoScript : MonoBehaviour {
 	private GameManagerScript gm;
 	private float currentTime = 0;
 	private float maxTime = 0;
-	private float restartTime = 4;
 
 
 	// Use this for initialization
@@ -35,21 +34,7 @@ public class FuelTachoScript : MonoBehaviour {
 		tileNumber = Mathf.Max(tileNumber, 0);
 
 		tacho.sprite = tiles[tileNumber];
-
-		if (currentTime > maxTime) {
-			gm.destroyPlayer();
-			restartTime -= Time.deltaTime;
-			Text gameOverLabel = GameObject.FindGameObjectWithTag("GameOverLabel").GetComponent<Text>();
-			Text restartLabel = GameObject.FindGameObjectWithTag("RestartLabel").GetComponent<Text>();
-			
-			gameOverLabel.text = "Out of Energy!";
-			restartLabel.text = "Restart in " + (int)restartTime;
-
-			if (restartTime <= 0){
-				gm.loadLevel();
-			}
-		}
-
+		
 			
 	}
 }
