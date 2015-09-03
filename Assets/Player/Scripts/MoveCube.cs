@@ -80,7 +80,9 @@ public class MoveCube : MonoBehaviour {
 
 		rb.velocity = vel;
 
-
+		if (Input.GetKey(KeyCode.Escape)){
+			GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().loadMainMenu();
+		}
 	}
 
 	void OnCollisionEnter(Collision collision) {

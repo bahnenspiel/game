@@ -35,6 +35,10 @@ public class AnimatePlayerMovement : MonoBehaviour {
 			afterburner2.GetComponent<ParticleSystem>().startSpeed = 50;
 		
 		}
+
+		if (this.transform.position.z >= 2000){
+			Destroy(gameObject);
+		}
 	
 	}
 }

@@ -18,6 +18,10 @@ public class GameManagerScript : MonoBehaviour {
 
 	private float currentTime = 0;
 	private float restartTime = 4;
+
+	private float speed = 0;
+	private float sensitivity = 0;
+	private bool bikeControl = true;
 	
 	private bool gameOver = false;
 	public bool doRestart = false;
@@ -72,8 +76,7 @@ public class GameManagerScript : MonoBehaviour {
 		}
 	}
 
-
-
+	
 	private void findPlayer(){
 		GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 		
@@ -103,33 +106,21 @@ public class GameManagerScript : MonoBehaviour {
 
 	}
 
-	public MoveCube getPlayer(){
-		return player;
-	}
-
-	public int getLevelLength(){
-		return levelLength;
-	}
-
-	public int getLevelNumber(){
-		return level;
-	}
-
-	public float getPlayerSpeed(){
-		return playerSpeed;
-	}
-
-	public float getCurrentTime(){
-		return currentTime;
-	}
-
-	public float getLevelTime(){
-		return levelTime;
-	}
 
 	public void loadLevel(){
 		player = null;
 		Application.LoadLevel("TrackLoaderScene");
+	}
+
+
+	public void loadMainMenu(){
+		currentTime = 0;
+		level = 1;
+		Application.LoadLevel("MenuScene");
+	}
+
+	public void loadConfigScene(){
+		Application.LoadLevel("ConfigScene");
 	}
 
 	public void levelLoaded(){
@@ -172,6 +163,52 @@ public class GameManagerScript : MonoBehaviour {
 		return skyboxes[(level-1)/textureChange];
 	}
 
+	public void setSpeed(float val){
+		speed = val;
+	}
 
+	public void setSensitivity(float val){
+		sensitivity = val;
+	}
+
+	public void setIsBikeControl(bool val){
+		bikeControl = val;
+	}
+
+	public float getSpeed(){
+		return speed;
+	}
+
+	public float getSensitivity(){
+		return sensitivity;
+	}
+	
+	public bool isBikeControl(){
+		return bikeControl;
+	}
+
+	public MoveCube getPlayer(){
+		return player;
+	}
+	
+	public int getLevelLength(){
+		return levelLength;
+	}
+	
+	public int getLevelNumber(){
+		return level;
+	}
+	
+	public float getPlayerSpeed(){
+		return playerSpeed;
+	}
+	
+	public float getCurrentTime(){
+		return currentTime;
+	}
+	
+	public float getLevelTime(){
+		return levelTime;
+	}
 }
  
