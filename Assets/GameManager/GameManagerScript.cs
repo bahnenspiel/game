@@ -47,7 +47,8 @@ public class GameManagerScript : MonoBehaviour {
 		if(player != null) {
 			playerSpeed = player.getCurrentSpeed();
 
-			currentTime += Time.deltaTime;
+			if(playerSpeed > 0)
+				currentTime += Time.deltaTime;
 			
 			if (Input.GetMouseButtonDown(1)) {
 				loadLevel();
@@ -145,6 +146,7 @@ public class GameManagerScript : MonoBehaviour {
 	}
 
 	public void LevelCompleted(){
+		Debug.Log("Level time: " + currentTime);
 		level++;
 
 		if (level > Resources.LoadAll("Levels/", typeof(TextAsset)).Length){

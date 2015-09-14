@@ -13,7 +13,7 @@ public class MoveCube : MonoBehaviour {
 	
 	public float drivingSpeed;
 	
-	public bool bikeControls = false;
+	public bool bikeControls = true;
 	public AudioClip jumpSound;
 
 	private Rigidbody rb;
@@ -57,7 +57,7 @@ public class MoveCube : MonoBehaviour {
 		Vector3 vel = rb.velocity;
 		
 		if (bikeControls) {
-			drivingSpeed = rcv.speed;
+			drivingSpeed = rcv.speed * 3.2f;
 			vel.x = rcv.pitch;
 		}
 		else {

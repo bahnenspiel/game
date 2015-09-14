@@ -57,12 +57,12 @@ public class SensorDataReceiver : MonoBehaviour
 				}
 				else if(messageText.StartsWith("rpm")){
 					messageText = messageText.Substring(3);
-					Debug.Log("rpm update: " + messageText);
+					//Debug.Log("rpm update: " + messageText);
 					var sp = float.Parse(messageText);
 					if(sp != 0)
 						speed = sp * 0.1f;
 					else
-						speed = speed * 0.9f;
+						speed = speed * 0.8f;
 				
 				}
 				else if(messageText.StartsWith("btn")){

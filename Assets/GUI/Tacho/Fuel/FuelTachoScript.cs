@@ -32,6 +32,7 @@ public class FuelTachoScript : MonoBehaviour {
 		int tileNumber = (int)(temp * tiles.Length);
 
 		tileNumber = Mathf.Max(tileNumber, 0);
+		tileNumber = Mathf.Min(tileNumber, tiles.Length - 1);
 
 		tacho.sprite = tiles[tileNumber];
 		
