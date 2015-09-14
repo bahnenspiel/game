@@ -10,7 +10,7 @@ public class GameManagerScript : MonoBehaviour {
 
 	private GameManagerScript instance;
 	private MoveCube player = null;
-	public int textureChange = 3;
+	public int textureChange = 2;
 	private int level = 1;
 	public int levelLength = 0;
 	public int levelTime = 0;
@@ -49,9 +49,15 @@ public class GameManagerScript : MonoBehaviour {
 
 			if(playerSpeed > 0)
 				currentTime += Time.deltaTime;
-			
+				
 			if (Input.GetMouseButtonDown(1)) {
+				restartTime = 0;
 				loadLevel();
+			}
+
+			if(player.transform.position.y < -80){
+				doRestart = true;
+				destroyPlayer();
 			}
 		}
 
