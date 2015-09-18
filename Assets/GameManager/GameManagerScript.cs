@@ -140,10 +140,11 @@ public class GameManagerScript : MonoBehaviour {
 
 	private void setLevelLabel(){
 		GameObject label = GameObject.FindGameObjectWithTag("LevelLabel");
-		
+				
 		if (label != null){
 			label.GetComponent<Text>().text = "Level " + level;
 		}
+
 	}
 
 	public void setGameOverLabel(string text){
