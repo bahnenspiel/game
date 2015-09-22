@@ -9,15 +9,15 @@ public class MoveCube : MonoBehaviour {
 	public float jumpSpeed = 100f;
 	
 	
-	public float minSpeed = 0, maxSpeed = 80;
+	private float minSpeed = 0, maxSpeed = 80;
 	
 	public float drivingSpeed;
 	
-	public bool bikeControls = true;
 	public AudioClip jumpSound;
 
 	private Rigidbody rb;
 	private SensorDataReceiver rcv;
+	private GameManagerScript gm;
 
 
 	private bool grounded = false;
@@ -26,6 +26,7 @@ public class MoveCube : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 		rcv = GetComponent<SensorDataReceiver>();
+		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
 	}
 
 	void GameOver() {
@@ -56,9 +57,9 @@ public class MoveCube : MonoBehaviour {
 		}
 		Vector3 vel = rb.velocity;
 		
-		if (bikeControls) {
+		if (gm.isBikeControl()) {
 			drivingSpeed = rcv.speed * 3.2f;
-			vel.x = rcv.pitch;
+			vel.x = rcv.pitch * 2 * gm.getSensitivity();
 		}
 		else {
 			
@@ -73,7 +74,7 @@ public class MoveCube : MonoBehaviour {
 			}
 		}
 		
-		drivingSpeed = Mathf.Min(drivingSpeed, maxSpeed);
+		drivingSpeed = Mathf.Min(drivingSpeed, maxSpeed * gm.getSpeed());
 		drivingSpeed = Mathf.Max(drivingSpeed, minSpeed);
 		
 		vel.z = drivingSpeed;
@@ -81,7 +82,7 @@ public class MoveCube : MonoBehaviour {
 		rb.velocity = vel;
 
 		if (Input.GetKey(KeyCode.Escape)){
-			GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().loadMainMenu();
+			gm.loadMainMenu();
 		}
 	}
 

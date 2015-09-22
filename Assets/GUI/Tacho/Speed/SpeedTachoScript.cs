@@ -24,8 +24,9 @@ public class SpeedTachoScript : MonoBehaviour {
 
 	private void updateTacho(){
 		playerSpeed = gm.getPlayerSpeed();
+		var speedSlider = gm.getSpeed();
 		//Debug.Log(">> SpeedTachoScript: Player Speed: " + playerSpeed);
-		int speedRange = 4;
+		int speedRange = (int) ((80 * speedSlider) / 10);
 		if (playerSpeed <= 0)
 			tacho.sprite = tiles[0];
 		for(int i = 0; i < 10; i++) {
